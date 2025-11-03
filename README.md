@@ -1,1 +1,1 @@
-yo
+Simple JAVASCRIPT RockPaperScissors Game

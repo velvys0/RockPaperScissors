@@ -36,33 +36,28 @@ function playRound(humanChoice,computerChoice) {
 
     if (humanChoice == "pierre" && computerChoice == "ciseaux") {
         humanScore ++;
-        return win
+        return console.log(win);
     } else if (humanChoice == "papier" && computerChoice == "pierre") {
         humanScore ++;
-        return win
+        return console.log(win);
     } else if (humanChoice == "ciseaux" && computerChoice == "papier") {
         humanScore ++;
-        return win
+        return console.log(win);
     } else if (humanChoice == computerChoice) {
-        return tie
+        return console.log(tie);
     } else {
         computerScore ++;
-        return loose
+        return console.log(loose);
     }
 }
 
 function playGame() {
     for (let i = 0; i < 5; i++) {
+        let humanSolution = getHumanChoice();
+        let computerSolution = getComputerChoice();
 
-        let humanChoice = getHumanChoice();
-        console.log(humanChoice);
-        let computerChoice = getComputerChoice();
-        console.log(computerChoice);
-
-        let result = playRound(humanChoice,computerChoice);
-        console.log(result);
+        playRound(humanSolution,computerSolution);
     }
-
     console.log("GG! Score final: VOUS = " + humanScore + " vs MACHINE = " + computerScore);
 }
 
