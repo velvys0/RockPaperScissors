@@ -1,5 +1,7 @@
 console.log("Hello World!");
 
+let computerScore = 0;
+let humanScore = 0;
 
 function getHumanChoice() {
     let choice = prompt("Pierre, papier, ciseaux!");
@@ -11,11 +13,6 @@ function getHumanChoice() {
         return
     }
 }
-
-let humanChoice = getHumanChoice();
-console.log(humanChoice);
-
-
 
 function getComputerChoice() {
     const choice = Math.random();
@@ -31,5 +28,42 @@ function getComputerChoice() {
     }
 }
 
-let computerChoice = getComputerChoice();
-console.log(computerChoice);
+function playRound(humanChoice,computerChoice) {
+
+    let win = "GG! " + computerChoice + " perd contre " + humanChoice + ".";
+    let loose = "Perdu! " + computerChoice + " gagne contre " + humanChoice + ".";
+    let tie = "Ex Aequo! deux " + humanChoice + ".";
+
+    if (humanChoice == "pierre" && computerChoice == "ciseaux") {
+        humanScore ++;
+        return win
+    } else if (humanChoice == "papier" && computerChoice == "pierre") {
+        humanScore ++;
+        return win
+    } else if (humanChoice == "ciseaux" && computerChoice == "papier") {
+        humanScore ++;
+        return win
+    } else if (humanChoice == computerChoice) {
+        return tie
+    } else {
+        computerScore ++;
+        return loose
+    }
+}
+
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+
+        let humanChoice = getHumanChoice();
+        console.log(humanChoice);
+        let computerChoice = getComputerChoice();
+        console.log(computerChoice);
+
+        let result = playRound(humanChoice,computerChoice);
+        console.log(result);
+    }
+
+    console.log("GG! Score final: VOUS = " + humanScore + " vs MACHINE = " + computerScore);
+}
+
+playGame();
