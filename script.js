@@ -3,6 +3,16 @@ console.log('Hello World!!!')
 var humanScore = 0
 var computerScore = 0
 
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log(button.textContent);
+    playRound(button.id, getComputerChoice())
+  });
+});
+
+
 function getComputerChoice() {
     const a = Math.random()
     if (a <= 0.33) {
@@ -12,10 +22,6 @@ function getComputerChoice() {
     } else {
         return 'scissors'
     }
-}
-
-function getHumanChoice() {
-    return window.prompt('Choose between "rock", "paper" and "scissors".')
 }
 
 function playRound(humanChoice,computerChoice) {
@@ -38,24 +44,3 @@ function playRound(humanChoice,computerChoice) {
     }
 }
 
-function playGame() {
-    playRound(getHumanChoice(), getComputerChoice())
-    playRound(getHumanChoice(), getComputerChoice())
-    playRound(getHumanChoice(), getComputerChoice())
-    playRound(getHumanChoice(), getComputerChoice())
-    playRound(getHumanChoice(), getComputerChoice())
-    console.log(`The game's over!`)
-
-    if (humanScore > computerScore) {
-        console.log(`Congratuations! You have won with ${humanScore} points against ${computerScore}.`)
-        return
-    } else if (humanScore === computerScore) {
-        console.log(`No winner! You both have a score of ${humanScore}.`)
-        return
-    } else {
-        console.log(`Too bad! You loose with a score of ${humanScore} points against ${computerScore}.`)
-        return
-    }
-}
-
-playGame()
