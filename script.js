@@ -5,13 +5,16 @@ var computerScore = 0
 
 const buttons = document.querySelectorAll("button");
 const result = document.querySelector('#result');
+const score = document.querySelector('#score');
+
 console.log(result.textContent)
-
-
+score.textContent = `Score : 0 - 0`
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     console.log(button.textContent);
-    playRound(button.id, getComputerChoice())
+    if (humanScore < 5 && computerScore < 5) {
+        playRound(button.id, getComputerChoice())
+    }    
   });
 });
 
@@ -34,19 +37,25 @@ function playRound(humanChoice,computerChoice) {
         || humanChoice === "paper" && computerChoice === "rock"
         || humanChoice === "scissors" && computerChoice === "paper"
         ) {
-            result.textContent = `You win! ${humanChoice} beat ${computerChoice}.`
-            console.log(`You win! ${humanChoice} beat ${computerChoice}.`)
             ++humanScore
+            if (humanScore != 5) {
+                result.textContent = `You win! ${humanChoice} beat ${computerChoice}.`
+            } else {
+                result.textContent = `The Game's over! You have won the Game`
+            }
+            score.textContent = `Score : ${humanScore} - ${computerScore}`
             return
-    } else if (humanChoice === computerChoice) {
-        result.textContent = `Tie! You both have chosen ${humanChoice}.`
-        console.log(`Tie! You both have chosen ${humanChoice}.`)
-        return 
-    } else {
-        result.textContent = `You Lose! ${computerChoice} beat ${humanChoice}.`
-        console.log(`You Lose! ${computerChoice} beat ${humanChoice}.`)
-        ++computerScore
-        return 
-    }
+        } else if (humanChoice === computerChoice) {
+            result.textContent = `Tie! You both have chosen ${humanChoice}.`
+            return 
+        } else {
+            ++computerScore
+            if (computerScore != 5) {
+                result.textContent = `You Lose! ${computerChoice} beat ${humanChoice}.` 
+            } else {
+                result.textContent = `The Game's over! You lost the game`
+            }
+            score.textContent = `Score : ${humanScore} - ${computerScore}`
+            return 
+        }
 }
-
